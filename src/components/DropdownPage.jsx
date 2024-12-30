@@ -205,7 +205,7 @@ const DropdownPage = ({
       {/* {isLoading && <p>Loading...</p>} */}
 
       {/* Error Message */}
-      {error && <p className="text-red-500">{error}</p>}
+      {/* {error && <p className="text-red-500">{error}</p>} */}
 
       {/* Render Additional Content */}
       <div className="mt-4">{children}</div>

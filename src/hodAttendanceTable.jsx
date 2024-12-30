@@ -70,7 +70,7 @@ const hodAttendanceTable = () => {
     //   setError('Please fill in all dropdown fields before fetching data.');
     //   return;
     // }
-    
+    setError(null);
     setLoading(true);
     try {
       console.log('Selected:', selected);
@@ -86,7 +86,7 @@ const hodAttendanceTable = () => {
       setAttendanceData(response.data);
       setError(null); // Clear error if fetch is successful
     } catch (err) {
-      setError('Failed to fetch attendance data. Please try again later.');
+      setError(err.response?.data?.message || 'Failed to fetch attendance data. Please try again.');
     } finally {
       setLoading(false);
     }
