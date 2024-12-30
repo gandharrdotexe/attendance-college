@@ -99,6 +99,7 @@ const hodAttendanceTable = () => {
   return (
     <div>
         <Navbar/>
+        <h1 className="text-2xl font-bold mt-4 text-center">HOD Attendance Data</h1>
         <DropdownPage
         criteria={criteria}
         selected={selected}
