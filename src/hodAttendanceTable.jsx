@@ -43,11 +43,8 @@ const hodAttendanceTable = () => {
     fetchCriteria();
   }, []);
 
-  const handleDropdownChange = (name, value) => {
-    setSelected((prevSelected) => ({
-      ...prevSelected,
-      [name]: value,
-    }));
+  const handleDropdownChange = (updatedValue) => {
+    setSelected((prev) => ({ ...prev, ...updatedValue }));
   };
   // const fetchAttendanceData = async () => {
   //   setLoading(true);
@@ -77,7 +74,8 @@ const hodAttendanceTable = () => {
     setLoading(true);
     try {
       console.log('Selected:', selected);
-      const { semester, branch, division, batch } = { semester:5, branch:'CS', division:'A', batch:'01' };
+      selected.branch = 'CS';
+      const { semester, branch, division, batch } = selected;
       console.log('Sending request with:', { semester, branch, division, batch });
       const response = await axios.get(
         'https://attendance-backend-gold.vercel.app/hod/fetchAttendanceData',
@@ -95,7 +93,7 @@ const hodAttendanceTable = () => {
   };
   
 
-  if (loading) return <div>Loading...</div>;
+  //if (loading) return <div>Loading...</div>;
   // if (error) return <div>Error: {error.message} {console.log(error.message)}</div>;
 
   return (
