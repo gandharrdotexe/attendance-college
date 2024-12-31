@@ -83,7 +83,7 @@ const AttendancePage = () => {
       >
         {/* Attendance Table */}
         {attendanceData.length > 0 && (
-          <div className="overflow-x-auto mt-4">
+          <div className="overflow-x-auto m-4">
             <table className="w-full border-collapse border border-gray-300">
               <thead>
                 <tr className="bg-blue-600 text-white">
