@@ -6,6 +6,7 @@ import AttendancePage from "./AttendancePage";
 import DynamicDropdowns from "./components/DynamicDropdowns";
 import FacultyPage from "./FacultyPage";
 import HodAttendanceTable from "./hodAttendanceTable";
+import SubjectsToFaculty from "./SubjectsToFaculty";
 
 function App() {
 
@@ -218,6 +219,11 @@ function App() {
       path: "/hod",
       // element: <DynamicDropdowns data = {data2}/>
       element: <HodAttendanceTable/>
+    },
+    {
+      path: "/hodSub",
+      // element: <DynamicDropdowns data = {data2}/>
+      element: <SubjectsToFaculty/>
     },
   ]);
 
