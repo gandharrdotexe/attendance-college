@@ -87,6 +87,7 @@ const hodAttendanceTable = () => {
       setError(null); // Clear error if fetch is successful
     } catch (err) {
       setError(err.response?.data?.message || 'Failed to fetch attendance data. Please try again.');
+     // setAttendanceData(null);
     } finally {
       setLoading(false);
     }
