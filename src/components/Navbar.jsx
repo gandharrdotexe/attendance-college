@@ -14,7 +14,7 @@ const Navbar = () => {
   
           {/* Links for Desktop */}
           <div className="hidden md:flex space-x-6">
-            <RouterLink to="/" className="hover:text-blue-200">
+            <RouterLink to="/faculty" className="hover:text-blue-200">
               Faculty
             </RouterLink>
             <RouterLink to="/hod" className="hover:text-blue-200">

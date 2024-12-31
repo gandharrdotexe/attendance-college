@@ -1,35 +1,64 @@
 import React, { useState } from "react";
 
-const DynamicDropdowns = ({ data }) => {
+const DynamicDropdowns = ({ data, onSelectionChange }) => {
   const [selectedSemester, setSelectedSemester] = useState("");
   const [selectedBranch, setSelectedBranch] = useState("");
   const [selectedDivision, setSelectedDivision] = useState("");
   const [selectedBatch, setSelectedBatch] = useState("");
 
+  const hasBranches = Boolean(data.branches); // Check if branches are available
+
   const handleSemesterChange = (e) => {
-    setSelectedSemester(e.target.value);
+    const semester = e.target.value;
+    setSelectedSemester(semester);
     setSelectedBranch("");
     setSelectedDivision("");
     setSelectedBatch("");
+
+    onSelectionChange({ semester, branch: "", division: "", batch: "" });
   };
 
   const handleBranchChange = (e) => {
-    setSelectedBranch(e.target.value);
+    const branch = e.target.value;
+    setSelectedBranch(branch);
     setSelectedDivision("");
     setSelectedBatch("");
+
+    onSelectionChange({
+      semester: selectedSemester,
+      branch,
+      division: "",
+      batch: "",
+    });
   };
 
   const handleDivisionChange = (e) => {
-    setSelectedDivision(e.target.value);
+    const division = e.target.value;
+    setSelectedDivision(division);
     setSelectedBatch("");
+
+    onSelectionChange({
+      semester: selectedSemester,
+      branch: selectedBranch,
+      division,
+      batch: "",
+    });
   };
 
   const handleBatchChange = (e) => {
-    setSelectedBatch(e.target.value);
+    const batch = e.target.value;
+    setSelectedBatch(batch);
+
+    onSelectionChange({
+      semester: selectedSemester,
+      branch: selectedBranch,
+      division: selectedDivision,
+      batch,
+    });
   };
 
   return (
-    <div className="space-y-6 p-6 bg-gray-100 rounded-lg shadow-md max-w-lg mx-auto">
+    <div className="space-y-6 p-6 bg-gray-100 rounded-lg shadow-md max-w-lg mx-auto mt-10">
       {/* Semesters Dropdown */}
       <div className="flex flex-col">
         <label className="text-gray-700 font-medium mb-2">Semester:</label>
@@ -47,8 +76,8 @@ const DynamicDropdowns = ({ data }) => {
         </select>
       </div>
 
-      {/* Branches Dropdown */}
-      {selectedSemester && (
+      {/* Branches Dropdown (if applicable) */}
+      {hasBranches && selectedSemester && (
         <div className="flex flex-col">
           <label className="text-gray-700 font-medium mb-2">Branch:</label>
           <select
@@ -67,7 +96,7 @@ const DynamicDropdowns = ({ data }) => {
       )}
 
       {/* Divisions Dropdown */}
-      {selectedBranch && (
+      {selectedSemester && (!hasBranches || selectedBranch) && (
         <div className="flex flex-col">
           <label className="text-gray-700 font-medium mb-2">Division:</label>
           <select
@@ -76,13 +105,19 @@ const DynamicDropdowns = ({ data }) => {
             className="px-4 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           >
             <option value="">Select Division</option>
-            {data.divisions[selectedSemester]?.[selectedBranch]?.map(
-              (division) => (
-                <option key={division} value={division}>
-                  {division}
-                </option>
-              )
-            )}
+            {hasBranches
+              ? data.divisions[selectedSemester]?.[selectedBranch]?.map(
+                  (division) => (
+                    <option key={division} value={division}>
+                      {division}
+                    </option>
+                  )
+                )
+              : data.divisions[selectedSemester]?.map((division) => (
+                  <option key={division} value={division}>
+                    {division}
+                  </option>
+                ))}
           </select>
         </div>
       )}
@@ -97,13 +132,21 @@ const DynamicDropdowns = ({ data }) => {
             className="px-4 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           >
             <option value="">Select Batch</option>
-            {data.batches[selectedSemester]?.[selectedBranch]?.[
-              selectedDivision
-            ]?.map((batch) => (
-              <option key={batch} value={batch}>
-                {batch}
-              </option>
-            ))}
+            {hasBranches
+              ? data.batches[selectedSemester]?.[selectedBranch]?.[selectedDivision]?.map(
+                  (batch) => (
+                    <option key={batch} value={batch}>
+                      {batch}
+                    </option>
+                  )
+                )
+              : data.batches[selectedSemester]?.[selectedDivision]?.map(
+                  (batch) => (
+                    <option key={batch} value={batch}>
+                      {batch}
+                    </option>
+                  )
+                )}
           </select>
         </div>
       )}
