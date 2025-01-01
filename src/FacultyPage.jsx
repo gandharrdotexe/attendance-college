@@ -64,7 +64,7 @@ const FacultyPage = () => {
 
   return (
     <><Navbar />
-    <div className="faculty-page flex flex-col items-center gap-10 my-10 w-full max-w-7xl mx-auto">      
+        
 
       {/* Page Content */}
       <div className="content flex flex-col items-center gap-10 w-full">
@@ -117,7 +117,8 @@ const FacultyPage = () => {
           </div>
         </div>
       </div>
-    </div></>
+    
+    </>
   );
 };
 

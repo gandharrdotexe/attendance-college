@@ -8,6 +8,7 @@ import FacultyPage from "./FacultyPage";
 import HodAttendanceTable from "./hodAttendanceTable";
 import SubjectsToFaculty from "./SubjectsToFaculty";
 
+
 function App() {
 
  
@@ -224,6 +225,11 @@ function App() {
       path: "/hodSub",
       // element: <DynamicDropdowns data = {data2}/>
       element: <SubjectsToFaculty/>
+    },
+    {
+      path: "/criteria",
+      // element: <DynamicDropdowns data = {data2}/>
+      element: <DynamicDropdowns data = {data2}/>
     },
   ]);
 

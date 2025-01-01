@@ -40,34 +40,28 @@ const Navbar = () => {
         {/* Mobile Menu */}
         {isMenuOpen && (
           <div className="md:hidden bg-blue-600">
-            <a
-              href="#home"
+            <RouterLink
+              to="/faculty"
               className="block px-4 py-2 hover:bg-blue-700"
               onClick={() => setIsMenuOpen(false)}
             >
-              Home
-            </a>
-            <a
-              href="#about"
+              Faculty
+            </RouterLink>
+            <RouterLink
+              to="/hod"
               className="block px-4 py-2 hover:bg-blue-700"
               onClick={() => setIsMenuOpen(false)}
             >
-              About
-            </a>
-            <a
-              href="#features"
+              HOD
+            </RouterLink>
+            <RouterLink
+              to="/principal"
               className="block px-4 py-2 hover:bg-blue-700"
               onClick={() => setIsMenuOpen(false)}
             >
-              Features
-            </a>
-            <a
-              href="#contact"
-              className="block px-4 py-2 hover:bg-blue-700"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Contact
-            </a>
+              Principal
+            </RouterLink>
+            
           </div>
         )}
       </nav>
