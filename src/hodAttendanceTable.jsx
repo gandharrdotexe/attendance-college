@@ -21,6 +21,7 @@ const hodAttendanceTable = () => {
   const [attendanceData, setAttendanceData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  
 
   // Fetch criteria for dropdowns
   useEffect(() => {

@@ -580,7 +580,7 @@ const Navbar = () => {
               >
                 ▼
               </span>
-            </button>
+            </button>getFacultyByDepartment
             <div
               className={`bg-blue-500 transition-all duration-300 ease-in-out ${
                 isDropdownOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0 overflow-hidden'

@@ -7,6 +7,7 @@ import DynamicDropdowns from "./components/DynamicDropdowns";
 import FacultyPage from "./FacultyPage";
 import HodAttendanceTable from "./hodAttendanceTable";
 import SubjectsToFaculty from "./SubjectsToFaculty";
+import GetFacultyByDepartment from "./GetFacultyByDepartment";
 
 
 function App() {
@@ -222,9 +223,12 @@ function App() {
       element: <HodAttendanceTable/>
     },
     {
-      path: "/hodSub",
-      // element: <DynamicDropdowns data = {data2}/>
+      path: "/hod/getSubjectsAndFaculty ",
       element: <SubjectsToFaculty/>
+    },
+    {
+      path: "/hod/getFacultyByDepartment",
+      element: <GetFacultyByDepartment/>
     },
     {
       path: "/criteria",
