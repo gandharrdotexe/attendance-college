@@ -3,8 +3,16 @@ import fetchAttendanceData from "./api/fetchAttendanceData";
 
 const AttendanceTable = ({ data }) => {
   if (!data || !data.attendance || data.attendance.length === 0) {
-    return <div>No data available</div>;
+    return <div></div>;
   }
+
+
+ 
+
+
+
+
+
 
   const exportToCSV = () => {
     const { students, attendanceRows, dates } = calculateData(data);
@@ -58,11 +66,34 @@ const AttendanceTable = ({ data }) => {
       };
     });
 
+    const convertToDDMMYYYY = (dateString) => {
+  try {
+    // Parse the date string into a JavaScript Date object
+    const date = new Date(dateString);
+
+    if (isNaN(date)) {
+      throw new Error("Invalid date string");
+    }
+
+    // Extract day, month, and year
+    const day = String(date.getUTCDate()).padStart(2, '0'); // Day (UTC)
+    const month = String(date.getUTCMonth() + 1).padStart(2, '0'); // Month (0-based, so +1)
+    const year = date.getUTCFullYear(); // Year
+
+    // Return formatted date as dd/mm/yyyy
+    return `${day}/${month}/${year}`;
+  } catch (error) {
+    console.error("Error converting date:", error.message);
+    return "Invalid Date";
+  }
+};
+
     // Process attendance data
     data.attendance.forEach((record) => {
-      const date = new Date(record.date).toLocaleDateString();
+      const date = convertToDDMMYYYY(record.date);
       const studentData = record.students;
       if (date) dates.push(date);
+      
 
       const presentCount = studentData.filter(
         (student) => student.attendance === 1

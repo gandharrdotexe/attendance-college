@@ -19,16 +19,14 @@ const FacultyPage = () => {
     console.log("Selected Values:", values);
     setSelectedValues(values);
   };
-
+  const handelReload = () =>
+  {
+    fetchData();
+}
   // Fetch attendance data
   const fetchData = async () => {
     try {
-      const semester = 5;
-      const subjectId = "CS501";
-      const branch = "CS";
-      const division = "A";
-      const batch = "01";
-
+      
       const response = await fetchAttendanceData(
         selectedValues.semester,
         "CS501",
@@ -64,7 +62,7 @@ const FacultyPage = () => {
 
   return (
     <><Navbar />
-        
+         
 
       {/* Page Content */}
       <div className="content flex flex-col items-center gap-10 w-full">
@@ -73,7 +71,7 @@ const FacultyPage = () => {
           {criteria ? (
             <DynamicDropdowns data={criteria} onSelectionChange={handleSelectionChange} />
           ) : (
-            <div>No criteria data available</div>
+            <div></div>
           )}
 
           <div>
@@ -97,12 +95,12 @@ const FacultyPage = () => {
                   </button>
                 </div>
               ) : (
-                <div>No attendance data available</div>
+                <div></div>
               )
             ) : (
               attendance ? (
                 <div>
-                  <UpdateAttendance data={attendance} />
+                  <UpdateAttendance data={attendance} handelReload={handelReload} />
                   <button
                     className="bg-blue-200 p-2 rounded-lg mt-4"
                     onClick={handelUpdareORreport}
@@ -117,7 +115,6 @@ const FacultyPage = () => {
           </div>
         </div>
       </div>
-    
     </>
   );
 };

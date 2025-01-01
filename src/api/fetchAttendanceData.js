@@ -11,6 +11,13 @@ import axios from "axios";
  * @param {string} batch - The batch value.
  * @returns {Promise} - A promise resolving to the API response data.
  */
+const sortAttendanceDataByDate = (data) => {
+  return {
+    attendance: data.attendance.sort(
+      (a, b) => new Date(a.date) - new Date(b.date)
+    ),
+  };
+};
 const fetchAttendanceData = async (
   semester,
   subjectId,
@@ -34,7 +41,7 @@ const fetchAttendanceData = async (
 
     // Log or return the response data
     console.log(response.data);
-    return response.data;
+    return (sortAttendanceDataByDate(response.data));
   } catch (error) {
     console.error("Error fetching attendance data:", error);
     throw error;

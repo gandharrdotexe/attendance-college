@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Navbar from './Navbar';
-
+import updateAttendanceData from '../api/updateAttendance';
 const UpdateAttendence = ({ data }) => {
     // Initialize state with the attendance data passed as props
     const [attendanceData, setAttendanceData] = useState(data);
@@ -44,7 +44,7 @@ const UpdateAttendence = ({ data }) => {
           },
         ],
       };
-  
+      console.log(newSessions)
       setAttendanceData([...attendanceData, newSession]);
       setIsUpdated(false); // Reset the update flag
     };
@@ -52,9 +52,11 @@ const UpdateAttendence = ({ data }) => {
     // Handle final update
     const handleUpdate = () => {
       // Here you would typically send the updated data to the backend
+
       console.log("Updated data: ", attendanceData);
       setIsUpdated(false); // Reset update flag after final update
-    //   console.log(attendanceData.a)
+      //   console.log(attendanceData.a)
+      
 
     };
   

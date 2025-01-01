@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-
-const UpdateAttendance = ({ data }) => {
+import updateAttendanceData from './api/updateAttendance';
+const UpdateAttendance = ({ data,handelReload }) => {
   const [attendanceData, setAttendanceData] = useState(data.attendance); // Original data
   const [newSessions, setNewSessions] = useState([]); // Newly added sessions
   const [isUpdated, setIsUpdated] = useState(false); // Track if data has been updated
@@ -16,6 +16,9 @@ const UpdateAttendance = ({ data }) => {
     
   }, []);
 
+  useEffect(() => {
+  console.log("newSessions updated:", newSessions);
+}, [newSessions]);
   // Function to convert date from yyyy-mm-dd to dd/mm/yyyy
   const formatDate = (isoDateString) =>
   {
@@ -103,15 +106,23 @@ const UpdateAttendance = ({ data }) => {
         })),
       };
       setNewSessions([...newSessions, newSession]);
+      
       setIsUpdated(false);
     }
+    console.log("new:",newSessions);
   };
 
   // Update the data and merge the new session data with the old
-  const handleUpdate = () => {
-    const updatedData = [...attendanceData, ...newSessions];
-    setAttendanceData(updatedData);
-    console.log(updatedData);
+  const handleUpdate = async() => {
+    
+   
+    console.log(newSessions);
+    try {
+      const response = await updateAttendanceData(newSessions);
+      handelReload();
+    } catch (error) {
+      console.error("Failed to update attendance:", error);
+    }
     setNewSessions([]); // Clear new sessions after update
     setIsUpdated(false); // Reset the update flag
   };
@@ -128,14 +139,18 @@ return dateA - dateB;
     <div style={{ overflowX: 'auto', padding: '20px' }}>
      <div style={{ marginBottom: '10px' }}>
         <label>Select Date for New Session: </label>
-        <input
-          type="date"
-          onChange={(e) => setNewSessionDate(e.target.value)}
-        
-          value={newSessionDate}
-          style={{ marginLeft: '10px' }}
-        />
-        {}
+       <input
+  type="date"
+  onChange={(e) => {
+    const date = e.target.value; // yyyy-mm-dd
+    const formattedDate = `${date}T03:30:00.000Z`; // Append time and UTC
+    setNewSessionDate(formattedDate);
+  }}
+  value={newSessionDate.split('T')[0]} // Show only the date part in the input
+  style={{ marginLeft: '10px' }}
+/>
+
+        {/* {newSessionDate} */}
         <button
           onClick={addSession}
           style={{ marginLeft: '10px', padding: '8px 16px', backgroundColor: '#007BFF', color: 'white' }}

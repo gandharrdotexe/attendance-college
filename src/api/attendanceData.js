@@ -11,6 +11,17 @@ const BASE_URL = "https://attendance-backend-gold.vercel.app";
  * @param {string} batch - Batch (e.g., "01" or "ALL").
  * @returns {Promise<object>} - Attendance data or error.
  */
+
+const sortAttendanceDataByDate = (data) => {
+  return {
+    attendance: data.attendance.sort(
+      (a, b) => new Date(a.date) - new Date(b.date)
+    ),
+  };
+};
+
+
+
 export const getAttendanceData = async (
   semester,
   subject_id,
@@ -26,7 +37,7 @@ export const getAttendanceData = async (
       }
     );
 
-    return response.data; // Return the attendance data
+     return (sortAttendanceDataByDate(response.data)); // Return the attendance data
   } catch (error) {
     if (error.response) {
       console.error("Server responded with an error:", error.response.data);
@@ -38,3 +49,4 @@ export const getAttendanceData = async (
     throw error; // Re-throw error for handling in the calling component
   }
 };
+// getAttendanceData("5", "CS501", "CS", "A", "01");
