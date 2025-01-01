@@ -8,6 +8,7 @@ import FacultyPage from "./FacultyPage";
 import HodAttendanceTable from "./hodAttendanceTable";
 import SubjectsToFaculty from "./SubjectsToFaculty";
 import GetFacultyByDepartment from "./GetFacultyByDepartment";
+import FacultyRoles from "./FacultyRoles";
 
 
 function App() {
@@ -223,7 +224,7 @@ function App() {
       element: <HodAttendanceTable/>
     },
     {
-      path: "/hod/getSubjectsAndFaculty ",
+      path: "/hod/getSubjectsAndFaculty",
       element: <SubjectsToFaculty/>
     },
     {
@@ -235,6 +236,10 @@ function App() {
       // element: <DynamicDropdowns data = {data2}/>
       element: <DynamicDropdowns data = {data2}/>
     },
+    {
+      path: "/hod/getFacultyRolesData" ,
+      element: <FacultyRoles/>
+    }
   ]);
 
   return <RouterProvider router={router} />;

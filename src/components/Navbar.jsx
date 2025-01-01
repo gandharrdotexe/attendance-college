@@ -538,6 +538,13 @@ const Navbar = () => {
               >
                 Get Faculty by Department
               </RouterLink>
+              <RouterLink
+                to="/hod/getFacultyRolesData"
+                className="block px-4 py-2 hover:bg-blue-200"
+                onClick={() => setIsDropdownOpen(false)}
+              >
+                Get Faculty Roles Data
+              </RouterLink>
             </div>
           </div>
 
@@ -615,6 +622,16 @@ const Navbar = () => {
                 }}
               >
                 Get Faculty by Department
+              </RouterLink>
+              <RouterLink
+                to="/hod/getFacultyRolesData"
+                className="block px-4 py-2 hover:bg-blue-700"
+                onClick={() => {
+                  setIsDropdownOpen(false);
+                  setIsMobileMenuOpen(false);
+                }}
+              >
+                Get Faculty Roles Data
               </RouterLink>
             </div>
           </div>

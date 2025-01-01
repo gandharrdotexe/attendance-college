@@ -4,7 +4,7 @@ import axios from 'axios';
 
 
 const GetFacultyByDepartment = () => {
-    // Fetch criteria for dropdowns
+
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const [facultyAndSubjects, setFacultyAndSubjects] = useState([]);
