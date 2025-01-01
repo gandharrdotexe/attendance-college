@@ -217,7 +217,7 @@ function App() {
       element: <FacultyPage/>
     },
     {
-      path: "/hod",
+      path: "/hod/getAttendance",
       // element: <DynamicDropdowns data = {data2}/>
       element: <HodAttendanceTable/>
     },
