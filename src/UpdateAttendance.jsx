@@ -143,14 +143,14 @@ return dateA - dateB;
   type="date"
   onChange={(e) => {
     const date = e.target.value; // yyyy-mm-dd
-    const formattedDate = `${date}T03:30:00.000Z`; // Append time and UTC
+    const formattedDate = `${date}T09:00:00.000Z`; // Append time and UTC
     setNewSessionDate(formattedDate);
   }}
   value={newSessionDate.split('T')[0]} // Show only the date part in the input
   style={{ marginLeft: '10px' }}
 />
 
-        {/* {newSessionDate} */}
+        {newSessionDate}
         <button
           onClick={addSession}
           style={{ marginLeft: '10px', padding: '8px 16px', backgroundColor: '#007BFF', color: 'white' }}

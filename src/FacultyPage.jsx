@@ -12,7 +12,12 @@ const FacultyPage = () => {
   const [attendance, setAttendance] = useState(null);
   const [reportORUpdate, setReportORUpdaate] = useState(true);
   const [buttonName, setButtonName] = useState(null);
-  const [criteria, setCriteria] = useState(null);
+ const [criteria, setCriteria] = useState({
+    semesters: [],
+    branches: {},
+    divisions: {},
+    batches: {},
+  });
   const [selectedValues, setSelectedValues] = useState({});
 
   const handleSelectionChange = (values) => {
@@ -62,11 +67,11 @@ const FacultyPage = () => {
 
   return (
     <><Navbar />
-         
+         <h1 className="text-2xl font-bold mt-4 text-center">Faculty Attendance Data</h1>
 
       {/* Page Content */}
       <div className="content flex flex-col items-center gap-10 w-full">
-      <div className="component-container w-full max-w-4xl bg-white p-5 border border-gray-300 rounded-lg shadow-md">
+      <div className="component-container w-full max-w-4xl bg-white p-5  rounded-lg ">
       {/* Render dropdowns only if criteria data exists */}
           {criteria ? (
             <DynamicDropdowns data={criteria} onSelectionChange={handleSelectionChange} />
@@ -75,12 +80,13 @@ const FacultyPage = () => {
           )}
 
           <div>
-            <button
+            {selectedValues.batch ? <button
               className="bg-green-200 p-2 rounded-lg mb-4"
               onClick={fetchData}
             >
               Fetch Attendance
-            </button>
+            </button>:<></> }
+            
 
             {/* Conditionally render based on reportORUpdate */}
             {reportORUpdate ? (
