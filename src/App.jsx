@@ -10,6 +10,7 @@ import SubjectsToFaculty from "./SubjectsToFaculty";
 import GetFacultyByDepartment from "./GetFacultyByDepartment";
 import FacultyRoles from "./FacultyRoles";
 import FacultyRolesRequest from "./FacultyRolesRequest";
+import LandingPage from "./LandingPage";
 
 
 function App() {
@@ -209,6 +210,11 @@ function App() {
   const router = createBrowserRouter([
     
     
+    {
+      path: "/",
+      // element: <DynamicDropdowns data = {data2}/>
+      element: <LandingPage/>
+    },
     {
       path: "/principal",
       // element: <DynamicDropdowns data = {data2}/>
