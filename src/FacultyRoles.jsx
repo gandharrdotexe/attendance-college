@@ -1,6 +1,7 @@
 import React,{useEffect,useState} from 'react'
 import Navbar from './components/Navbar';
 import axios from 'axios';
+import { Link as RouterLink } from 'react-router-dom';
 
 const FacultyRoles = () => {
     const [loading, setLoading] = useState(false);
@@ -57,6 +58,18 @@ const FacultyRoles = () => {
             </table>
           </div>
         )}
+        <RouterLink to="/hod/assignFacultyRolesData">
+          <div className="flex flex-row mt-4 w-full max-w-2xl">
+                
+                        <button
+                            className="max-w-xs bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-600 transition duration-300 mt-4 ml-auto"
+                            >
+                                Add Faculty Roles
+                        </button>
+                
+                
+          </div>
+          </RouterLink>
       </div>
     </div>
   );

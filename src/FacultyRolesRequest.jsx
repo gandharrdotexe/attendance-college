@@ -3,6 +3,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import Navbar from "./components/Navbar";
+import { Link as RouterLink } from 'react-router-dom';
 
 const FacultyRolesRequest = () => {
   const [facultyData, setFacultyData] = useState([]);
@@ -11,11 +12,14 @@ const FacultyRolesRequest = () => {
   const [rolesList, setRolesList] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [isRoleUpdated, setIsRoleUpdated] = useState(false); 
+  
 
   // Fetching faculty data
   useEffect(() => {
     const fetchFacultyData = async () => {
       setLoading(true);
+       
       try {
         const response = await axios.get(
           "https://attendance-backend-gold.vercel.app/hod/getFacultyRolesData",
@@ -52,6 +56,7 @@ const FacultyRolesRequest = () => {
         toast.error(`Role "${formattedRole}" is already assigned to the faculty!`);
       } else {
         setRolesList((prevRoles) => [...prevRoles, formattedRole]);
+        setIsRoleUpdated(true);
         toast.success(`Role "${formattedRole}" added to the list!`);
       }
       
@@ -59,6 +64,7 @@ const FacultyRolesRequest = () => {
     } else {
       toast.error("Please enter a valid role!");
     }
+
   };
 
     
@@ -84,6 +90,7 @@ const FacultyRolesRequest = () => {
           );
           if (response.status === 200) {
             toast.success("Roles updated successfully!");
+            setIsRoleUpdated(false);
           } else {
             toast.error("Failed to update roles!");
           }
@@ -94,9 +101,10 @@ const FacultyRolesRequest = () => {
 
   return (
     <><Navbar />
-    <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-center p-4">
-          <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
-              <h2 className="text-xl font-semibold text-gray-700 mb-4">Faculty Roles Management</h2>
+    <h1 className="text-2xl font-bold mt-4 text-center">Faculty Roles Management</h1>
+    <div className="min-h-screen flex flex-col items-center p-4">
+          <div className="bg-gray-100 p-6 rounded-lg shadow-lg w-full max-w-2xl">
+              
 
               {/* Faculty Dropdown */}
               <div className="mb-4">
@@ -145,15 +153,30 @@ const FacultyRolesRequest = () => {
                   </div>
               )}
               {/* Update Roles Button */}
-              {selectedFaculty && (
+              {selectedFaculty && isRoleUpdated &&(
                   <button
                       onClick={handleUpdateRoles}
+                     
                       className="w-full bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-600 transition duration-300 mt-4"
                   >
                       Update Roles
                   </button>
               )}
           </div>
+
+          <RouterLink to="/hod/getFacultyRolesData">
+          <div className="flex flex-row mt-4 w-full max-w-2xl">
+                
+                        <button
+                            className="max-w-xs bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-600 transition duration-300 mt-4 ml-auto"
+                            >
+                                View Faculty Roles
+                        </button>
+                
+                
+          </div>
+          </RouterLink>
+          
 
           {loading && <p className="text-gray-600 mt-4">Loading...</p>}
           {error && <p className="text-red-500 mt-4">{error}</p>}
