@@ -9,6 +9,7 @@ import HodAttendanceTable from "./hodAttendanceTable";
 import SubjectsToFaculty from "./SubjectsToFaculty";
 import GetFacultyByDepartment from "./GetFacultyByDepartment";
 import FacultyRoles from "./FacultyRoles";
+import FacultyRolesRequest from "./FacultyRolesRequest";
 
 
 function App() {
@@ -239,6 +240,11 @@ function App() {
     {
       path: "/hod/getFacultyRolesData" ,
       element: <FacultyRoles/>
+    },
+    {
+      path: "/hod/assignFacultyRolesData",
+      element: <FacultyRolesRequest/>
+
     }
   ]);
 
